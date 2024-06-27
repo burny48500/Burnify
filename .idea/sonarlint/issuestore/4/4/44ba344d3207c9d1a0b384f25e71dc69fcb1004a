@@ -1,39 +1,39 @@
 
 l
-java:S1604Ï"(Make this anonymous inner class a lambda(îÍÎË8³äÛª…2J$69570e67-3241-4919-9ee6-29c14fd8e421
+java:S1604Ï"(Make this anonymous inner class a lambda(îÍÎË8³äÛª…2J$4bf74066-7ac3-457f-8831-395541cf4569
 k
-java:S1604Û"(Make this anonymous inner class a lambda(Ì®Ü	8³äÛª…2J$12078433-3a2c-4376-a22e-b322c39aafeb
-	java:S112è"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿ8µäÛª…2J$0bc7a2b3-2102-4bea-8799-af59788cf37c
+java:S1604Û"(Make this anonymous inner class a lambda(Ì®Ü	8³äÛª…2J$5e5a4515-b4db-4d04-80e0-100fb618e204
+	java:S112è"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿ8µäÛª…2J$6c8a5f33-af8e-4dc6-bf50-b9a44fe4d099
 ‹
-java:S1192L"HDefine a constant instead of duplicating this literal "images/" 3 times.(¸õè®8µäÛª…2J$c2181a79-e252-4435-bdbf-3d7d08135750
+java:S1192L"HDefine a constant instead of duplicating this literal "images/" 3 times.(¸õè®8µäÛª…2J$62793700-efe3-4b20-aea4-fb43ad4fa045
 —
-java:S14503"TRemove the "media" field and declare it as a local variable in the relevant methods.(¯­ß8¶äÛª…2J$1a7734a1-ee48-4912-8216-4b03ea3f2e6c
+java:S14503"TRemove the "media" field and declare it as a local variable in the relevant methods.(¯­ß8¶äÛª…2J$e51aab8e-d32f-49ea-8ca2-92eb418f1339
 ›
-java:S1450:"SRemove the "next" field and declare it as a local variable in the relevant methods.(“´îüÿÿÿÿ8¶äÛª…2J$992890ba-4c4d-4a27-a0d1-c84f9251afb5
+java:S1450:"SRemove the "next" field and declare it as a local variable in the relevant methods.(“´îüÿÿÿÿ8¶äÛª…2J$a3d99481-f8fd-49a6-8eaf-2888c44f6499
 œ
-java:S14502"YRemove the "scrollPane" field and declare it as a local variable in the relevant methods.(¶÷ä¿8¶äÛª…2J$62469257-1b15-4f00-a5d3-1f997df6a0ab
+java:S14502"YRemove the "scrollPane" field and declare it as a local variable in the relevant methods.(¶÷ä¿8¶äÛª…2J$2f7144b6-d9a8-4f5c-998c-7653fe22c444
  
-java:S1450-"^Remove the "searchBarButton" field and declare it as a local variable in the relevant methods.(÷³›<8¶äÛª…2J$bf4cb90f-4b06-421f-b254-7f8cfe03bfc2
+java:S1450-"^Remove the "searchBarButton" field and declare it as a local variable in the relevant methods.(÷³›<8¶äÛª…2J$f2923ea6-4e7d-4d98-86ea-f3e1017f3401
 ¤
-java:S1450."\Remove the "searchBarHBox" field and declare it as a local variable in the relevant methods.(ƒïŠøÿÿÿÿ8·äÛª…2J$3245403c-ecee-4d3e-9dea-0fb0c2141b90
-l	java:S106S"+Replace this use of System.out by a logger.(áùÎY8»äÛª…2J$e85c9e4f-9054-48bb-adcc-83d93bbde82a
-r	java:S106T"+Replace this use of System.out by a logger.(öÄŸÚûÿÿÿÿ8»äÛª…2J$e8edb080-f019-4f68-8e31-b5661cbdc81e
-n	java:S106"+Replace this use of System.out by a logger.(ëê†•8¿äÛª…2J$5bc1a5d6-0423-4400-bd54-c72e4f5b8973
-n	java:S106"+Replace this use of System.out by a logger.(’¾ø8¿äÛª…2J$7bc7d912-e77f-4d59-b6a4-d92c67a24713
-s	java:S106‘"+Replace this use of System.out by a logger.(ıŞÁıÿÿÿÿ8¿äÛª…2J$bd6fa94f-8d3f-4de3-bd81-b5c10ff38f83
-s	java:S106’"+Replace this use of System.out by a logger.(öÄŸÚûÿÿÿÿ8¿äÛª…2J$35705594-8c50-48f6-90be-2e1f427beec6
-m	java:S106“"+Replace this use of System.out by a logger.(áùÎY8¿äÛª…2J$7f3f66bd-89fb-41c3-a708-cf62fb8c1a30
-s	java:S106”"+Replace this use of System.out by a logger.(…„ÿüøÿÿÿÿ8¿äÛª…2J$c6281973-29ec-4dc3-802f-b13a7c368529
+java:S1450."\Remove the "searchBarHBox" field and declare it as a local variable in the relevant methods.(ƒïŠøÿÿÿÿ8·äÛª…2J$a80f45f4-1ed2-4894-aa19-8276d581d733
+l	java:S106S"+Replace this use of System.out by a logger.(áùÎY8»äÛª…2J$1327b69c-22d5-45ec-98a2-a8685dba9024
+r	java:S106T"+Replace this use of System.out by a logger.(öÄŸÚûÿÿÿÿ8»äÛª…2J$d0a346f2-5945-420a-b07e-49400f602846
+n	java:S106"+Replace this use of System.out by a logger.(ëê†•8¿äÛª…2J$f7029b62-462a-4a85-93c2-fc343aee4455
+n	java:S106"+Replace this use of System.out by a logger.(’¾ø8¿äÛª…2J$da4ab727-06fa-46d1-a664-e2b316cc494f
+s	java:S106‘"+Replace this use of System.out by a logger.(ıŞÁıÿÿÿÿ8¿äÛª…2J$3415be4b-d7aa-4aa6-b4a0-95b43059939f
+s	java:S106’"+Replace this use of System.out by a logger.(öÄŸÚûÿÿÿÿ8¿äÛª…2J$c3d0790c-85ae-4d71-833e-551475f25eb2
+m	java:S106“"+Replace this use of System.out by a logger.(áùÎY8¿äÛª…2J$81609c84-ce47-43e7-9066-739ec9c141a3
+s	java:S106”"+Replace this use of System.out by a logger.(…„ÿüøÿÿÿÿ8¿äÛª…2J$a4b1b71c-48e1-4c2e-9166-f8730cb28822
 z
-java:S2696œ"6Make the enclosing method "static" or remove this set.(Œ¢ÒË8ÀäÛª…2J$bf52c0c3-e4aa-43ca-8c7c-220bcfedf56e
-„	java:S125†"<This block of commented-out lines of code should be removed.(½¦Ñûÿÿÿÿ8ÄäÛª…2J$bf019d56-c4e1-4f24-8a87-81ec0329ba47
-	java:S125•"<This block of commented-out lines of code should be removed.(èÊ”Å8ÆäÛª…2J$72b49dcc-2841-440a-9153-1fc4bd88cfd2
-„	java:S125—"<This block of commented-out lines of code should be removed.(’âŞùÿÿÿÿ8ÆäÛª…2J$c5857e26-2680-43d5-a428-88483788ec71
-s	java:S106ª"+Replace this use of System.out by a logger.(…„ÿüøÿÿÿÿ8ÇäÛª…2J$58c88463-fa5e-46f9-86cd-7de57d076640
-s	java:S106«"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÇäÛª…2J$9cd12fc6-c0c8-491a-8746-aebaba3dd00b
+java:S2696œ"6Make the enclosing method "static" or remove this set.(Œ¢ÒË8ÀäÛª…2J$103b8efc-5f5c-4d55-8425-fc27e0706d2e
+„	java:S125†"<This block of commented-out lines of code should be removed.(½¦Ñûÿÿÿÿ8ÄäÛª…2J$b58ddd71-cc86-4070-a176-b63037ce2b5e
+	java:S125•"<This block of commented-out lines of code should be removed.(èÊ”Å8ÆäÛª…2J$adc8909a-e8a5-4380-ac99-a028f2de4252
+„	java:S125—"<This block of commented-out lines of code should be removed.(’âŞùÿÿÿÿ8ÆäÛª…2J$904102c6-fd5f-4d0d-91ef-6bc01bef0b65
+s	java:S106ª"+Replace this use of System.out by a logger.(…„ÿüøÿÿÿÿ8ÇäÛª…2J$25a0d4bf-9829-46d3-a53d-5f846ee6de4f
+s	java:S106«"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÇäÛª…2J$e225fc50-9ad6-4b9d-bae2-882b1533e49c
 z
-java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8ÇäÛª…2J$252821f2-baea-494d-8c16-ceccf1c3ffea
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8ÇäÛª…2J$21e27bda-ae24-4f39-9c2e-4724b5ecb66b
 q
-java:S10682".Remove this unused "scrollPane" private field.(¶÷ä¿8ÇäÛª…2J$eddf3e8d-c112-4842-b705-d0d0996b05ee
+java:S10682".Remove this unused "scrollPane" private field.(¶÷ä¿8ÇäÛª…2J$ec63715b-e878-4b97-b9d4-a88b55eb72f9
 p
-java:S1068:"(Remove this unused "next" private field.(“´îüÿÿÿÿ8ÇäÛª…2J$281591e4-2c23-4c07-b02a-bb4a27f940ab
+java:S1068:"(Remove this unused "next" private field.(“´îüÿÿÿÿ8ÇäÛª…2J$fc27ce70-d8ca-4320-95a1-fb54e6e5dd79
