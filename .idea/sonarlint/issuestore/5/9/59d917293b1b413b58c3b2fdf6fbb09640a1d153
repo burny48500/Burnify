@@ -1,0 +1,12 @@
+
+¡
+java:S2142:"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€8ÆÆè€2J$5e3a4b04-54a8-47f1-ae3b-8bb7bc65d5ad
+r	java:S106&"+Replace this use of System.out by a logger.(Ø§†¬üÿÿÿÿ8ŸÆÆè€2J$cfc44c5f-d0ee-402d-bc21-dbdaf0558f19
+r	java:S106("+Replace this use of System.out by a logger.(Å­Ëİúÿÿÿÿ8ŸÆÆè€2J$c997b723-a182-4cd6-8e80-d6ac2688138a
+r	java:S106,"+Replace this use of System.out by a logger.(•Ô¾öüÿÿÿÿ8ŸÆÆè€2J$505ae78f-65d9-459f-87db-7798358dca85
+r	java:S106."+Replace this use of System.out by a logger.(Å­Ëİúÿÿÿÿ8ŸÆÆè€2J$c7e091d2-95f6-4f23-b1c4-3e2733bbd85e
+r	java:S1064"+Replace this use of System.out by a logger.(ÈÔÉµûÿÿÿÿ8ŸÆÆè€2J$b4fd3411-f478-45e7-a3b1-f416f94e5de7
+r	java:S1068"+Replace this use of System.out by a logger.(•­—ûÿÿÿÿ8 ÆÆè€2J$c0d019ee-709f-47b5-99fb-095b792210a8
+r	java:S106;"+Replace this use of System.out by a logger.(¦ìİåùÿÿÿÿ8 ÆÆè€2J$6dded2f1-27e9-4164-9ced-80892cb6d62a
+
+java:S1128"9Remove this unused import 'javafx.scene.image.ImageView'.(áÿ®Ãüÿÿÿÿ8ÆÚÏè€2J$5dec9fea-6203-44a8-9415-2fa78541b917

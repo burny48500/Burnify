@@ -1,0 +1,39 @@
+
+F
+java:S1604Ï"(Make this anonymous inner class a lambda(îÍÎË8³äÛª…2
+E
+java:S1604Û"(Make this anonymous inner class a lambda(Ì®Ü	8³äÛª…2
+h	java:S112è"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿ8µäÛª…2
+e
+java:S1192L"HDefine a constant instead of duplicating this literal "images/" 3 times.(¸õè®8µäÛª…2
+q
+java:S14503"TRemove the "media" field and declare it as a local variable in the relevant methods.(¯­ß8¶äÛª…2
+u
+java:S1450:"SRemove the "next" field and declare it as a local variable in the relevant methods.(“´îüÿÿÿÿ8¶äÛª…2
+v
+java:S14502"YRemove the "scrollPane" field and declare it as a local variable in the relevant methods.(¶÷ä¿8¶äÛª…2
+z
+java:S1450-"^Remove the "searchBarButton" field and declare it as a local variable in the relevant methods.(÷³›<8¶äÛª…2
+~
+java:S1450."\Remove the "searchBarHBox" field and declare it as a local variable in the relevant methods.(ƒïŠøÿÿÿÿ8·äÛª…2
+F	java:S106S"+Replace this use of System.out by a logger.(áùÎY8»äÛª…2
+L	java:S106T"+Replace this use of System.out by a logger.(öÄŸÚûÿÿÿÿ8»äÛª…2
+H	java:S106"+Replace this use of System.out by a logger.(ëê†•8¿äÛª…2
+H	java:S106"+Replace this use of System.out by a logger.(’¾ø8¿äÛª…2
+M	java:S106‘"+Replace this use of System.out by a logger.(ıŞÁıÿÿÿÿ8¿äÛª…2
+M	java:S106’"+Replace this use of System.out by a logger.(öÄŸÚûÿÿÿÿ8¿äÛª…2
+G	java:S106“"+Replace this use of System.out by a logger.(áùÎY8¿äÛª…2
+M	java:S106”"+Replace this use of System.out by a logger.(…„ÿüøÿÿÿÿ8¿äÛª…2
+T
+java:S2696œ"6Make the enclosing method "static" or remove this set.(Œ¢ÒË8ÀäÛª…2
+^	java:S125†"<This block of commented-out lines of code should be removed.(½¦Ñûÿÿÿÿ8ÄäÛª…2
+Y	java:S125•"<This block of commented-out lines of code should be removed.(èÊ”Å8ÆäÛª…2
+^	java:S125—"<This block of commented-out lines of code should be removed.(’âŞùÿÿÿÿ8ÆäÛª…2
+M	java:S106ª"+Replace this use of System.out by a logger.(…„ÿüøÿÿÿÿ8ÇäÛª…2
+M	java:S106«"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÇäÛª…2
+T
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8ÇäÛª…2
+K
+java:S10682".Remove this unused "scrollPane" private field.(¶÷ä¿8ÇäÛª…2
+J
+java:S1068:"(Remove this unused "next" private field.(“´îüÿÿÿÿ8ÇäÛª…2
