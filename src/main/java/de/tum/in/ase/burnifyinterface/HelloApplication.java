@@ -71,8 +71,9 @@ public class HelloApplication extends Application {
     //GitHub trial
 
     public void showImages() throws FileNotFoundException {
-        textFlow.getChildren().removeAll();
-        songList.clear();
+        textFlow = new TextFlow();
+        songList = new ArrayList<>();
+        sortedFileArray = new ArrayList<>();
         File imagesDir = new File("images/");
         sortedFileArray = Arrays.stream(imagesDir.listFiles()).toList();
         for (File file : sortedFileArray) {
@@ -92,10 +93,12 @@ public class HelloApplication extends Application {
         imageView.setPreserveRatio(true);
         imageView.fitWidthProperty().bind(musicPlayerVBox.widthProperty().divide(3));
         imageView.fitHeightProperty().bind(musicPlayerVBox.heightProperty().divide(3));
-        if (!textFlow.getChildren().contains(imageView)) {
-            textFlow.getChildren().add(imageView);
-        }
+
+        textFlow.getChildren().add(imageView);
+
         imageView.setPickOnBounds(true);
+
+        System.out.println(imageView);
 
         imageView.setOnMouseClicked((MouseEvent e) -> {
             if (buttonCount.get() % 2 == 0) {
@@ -123,7 +126,8 @@ public class HelloApplication extends Application {
         playingStatus = true;
     }
 
-    public void addFile() throws FileNotFoundException {
+    public void addFile() throws IOException {
+        Stage stage = new Stage();
         File dir = new File("images/");
         File[] files = dir.listFiles();
 
@@ -133,26 +137,27 @@ public class HelloApplication extends Application {
                 lastModifiedFile = files[i];
             }
         }
+
         String fileInputStreamPath = lastModifiedFile.getPath();
         File file = new File(fileInputStreamPath);
         imagesToSongs(file);
-        showImages();
-        soundCreator(finalUrl);
-        playingStatus = true;
+        start(stage);
 
-        System.out.println(file);
-        System.out.println(fileInputStreamPath);
-        System.out.println(finalUrl);
-        System.out.println(songList);
-        System.out.println(sortedFileArray);
-        System.out.println(songList.size());
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+        }
+
+        soundCreator(finalUrl);
+
+        playingStatus = true;
+        showPlayPauseButton();
+
+
     }
 
 
     @Override
     public void start(Stage stage) throws IOException {
-
-
         musicPlayerVBox = new VBox();
         musicPlayerHBox = new HBox();
         searchBarHBox = new HBox();
@@ -181,7 +186,7 @@ public class HelloApplication extends Application {
             if (buttonCount.get() % 2 != 0) {
                 buttonCount.addAndGet(1);
             }
-            playingStatus = true;
+            playingStatus = false;
             showPlayPauseButton();
         });
 
@@ -190,14 +195,14 @@ public class HelloApplication extends Application {
         previousButton = new Button("Previous");
         previousButton.setOnMouseClicked((MouseEvent e) -> {
             next=true;
-            previousNextSong(songList.indexOf(finalUrl)-1 >= 0, 1, songList.size() - 1);
+            previousNextSong(songList.indexOf(finalUrl)-1 >= 0, 1, songList.size() - 1, false);
         });
 
 
         nextButton = new Button("Next");
         nextButton.setOnMouseClicked((MouseEvent e) -> {
             next=true;
-            previousNextSong(songList.indexOf(finalUrl)+1 <= songList.size()-1, -1, 0);
+            previousNextSong(songList.indexOf(finalUrl)+1 <= songList.size()-1, -1, 0, true);
         });
 
         volumeSlider = new Slider(0, 100, 1);
@@ -219,7 +224,7 @@ public class HelloApplication extends Application {
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
-                labelPause(searchBarLabel);
+                //labelPause(searchBarLabel);
                 String ytUrl = searchBar.getText();
                 YoutubeDownloader youtubeDownloader = new YoutubeDownloader();
                 int exitCode = youtubeDownloader.downloadSong(ytUrl);
@@ -261,7 +266,6 @@ public class HelloApplication extends Application {
 
         //scrollPane.setContent(textFlow);
         //scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-
         musicPlayerVBox.getChildren().addAll(searchBarHBox, textFlow, musicPlayerHBox);
 
         // Set VBox to grow with window
@@ -278,8 +282,8 @@ public class HelloApplication extends Application {
 
     //previousNextSong(songList.indexOf(finalUrl)+1 <= songList.size()-1, -1, 0);
 
-    private void previousNextSong(boolean a, int b, int getThis) {
-        if (mediaPlayer.getCurrentTime().lessThan(Duration.millis(5000))) {
+    private void previousNextSong(boolean a, int b, int getThis, boolean c) {
+        if (mediaPlayer.getCurrentTime().lessThan(Duration.millis(5000)) || c) {
             mediaPlayer.stop();
             if (a) {
                 String previousSongString = songList.get(songList.indexOf(finalUrl) - (b));
@@ -295,8 +299,6 @@ public class HelloApplication extends Application {
         }
         playingStatus = true;
         showPlayPauseButton();
-        System.out.println(songList.size());
-        System.out.println();
     }
 
 
