@@ -55,7 +55,6 @@ public class HelloApplication extends Application {
     private List<String> songList = new ArrayList<>();
     private boolean playingStatus = false;
     private String finalUrl;
-    private boolean next;
     private TilePane tilePane;
     private Stage stage;
     private String ytUrl;
@@ -130,6 +129,8 @@ public class HelloApplication extends Application {
         media = new Media(new File(url).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setOnEndOfMedia(() ->
+                previousNextSong(songList.indexOf(finalUrl) + 1 <= songList.size() - 1, -1, 0, true));
         playingStatus = true;
     }
 
@@ -174,7 +175,6 @@ public class HelloApplication extends Application {
 
         playPauseButton = new Button("Pause");
         playPauseButton.setOnMouseClicked((MouseEvent e) -> {
-            next = false;
             playingStatus = true;
             showPlayPauseButton();
             if (buttonCount.get() % 2 != 0) {
@@ -203,7 +203,6 @@ public class HelloApplication extends Application {
 
         previousButton = new Button("Previous");
         previousButton.setOnMouseClicked((MouseEvent e) -> {
-            next = true;
             previousNextSong(songList.indexOf(finalUrl) - 1 >= 0, 1, songList.size() - 1, false);
             buttonCount.addAndGet(1);
             System.out.println(buttonCount);
@@ -211,7 +210,6 @@ public class HelloApplication extends Application {
 
         nextButton = new Button("Next");
         nextButton.setOnMouseClicked((MouseEvent e) -> {
-            next = true;
             previousNextSong(songList.indexOf(finalUrl) + 1 <= songList.size() - 1, -1, 0, true);
             buttonCount.addAndGet(1);
             System.out.println(buttonCount);
@@ -285,7 +283,7 @@ public class HelloApplication extends Application {
         scrollPane.setStyle("-fx-background: transparent;"); // Make ScrollPane background transparent
 
         scrollPane.addEventFilter(ScrollEvent.SCROLL, event1 -> {
-            double deltaY = event1.getDeltaY() * 5; // Adjust the scroll speed multiplier as needed
+            double deltaY = event1.getDeltaY() * 2; // Adjust the scroll speed multiplier as needed
             scrollPane.setVvalue(scrollPane.getVvalue() - deltaY / scrollPane.getHeight());
             event1.consume();
         });
