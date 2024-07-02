@@ -12,8 +12,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -25,10 +27,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -56,11 +56,17 @@ public class HelloApplication extends Application {
     private boolean playingStatus = false;
     private String finalUrl;
     private boolean next;
+    private TilePane tilePane;
+    private Stage stage;
+    private String ytUrl;
+    private YoutubeDownloader youtubeDownloader;
+    private int exitCode;
+    private String labelText;
 
 
     private void labelPause(Label label) {
         PauseTransition visiblePause = new PauseTransition(
-                Duration.seconds(2)
+                Duration.seconds(5)
         );
         visiblePause.setOnFinished(
                 event -> label.setVisible(false)
@@ -73,6 +79,7 @@ public class HelloApplication extends Application {
     public void showImages() throws FileNotFoundException {
         textFlow = new TextFlow();
         songList = new ArrayList<>();
+        tilePane = new TilePane();
         sortedFileArray = new ArrayList<>();
         File imagesDir = new File("images/");
         sortedFileArray = Arrays.stream(imagesDir.listFiles()).toList();
@@ -91,10 +98,10 @@ public class HelloApplication extends Application {
         imageView = new ImageView(image);
 
         imageView.setPreserveRatio(true);
-        imageView.fitWidthProperty().bind(musicPlayerVBox.widthProperty().divide(3));
-        imageView.fitHeightProperty().bind(musicPlayerVBox.heightProperty().divide(3));
+        imageView.fitWidthProperty().bind(scrollPane.widthProperty().divide(3)); // Adjust width to fill the scroll pane
+        imageView.setFitHeight(200); // Set a fixed height for each image
 
-        textFlow.getChildren().add(imageView);
+        tilePane.getChildren().add(imageView);
 
         imageView.setPickOnBounds(true);
 
@@ -110,8 +117,8 @@ public class HelloApplication extends Application {
             }
             buttonCount.addAndGet(1);
             showPlayPauseButton();
+            System.out.println(buttonCount);
         });
-
     }
 
     private void imagesToSongs(File file) {
@@ -127,7 +134,6 @@ public class HelloApplication extends Application {
     }
 
     public void addFile() throws IOException {
-        Stage stage = new Stage();
         File dir = new File("images/");
         File[] files = dir.listFiles();
 
@@ -143,10 +149,11 @@ public class HelloApplication extends Application {
         imagesToSongs(file);
         start(stage);
 
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-        }
+        searchBarLabel.setText(labelText);
+        labelPause(searchBarLabel);
+        searchBar.setText("");
 
+        mediaPlayer.stop();
         soundCreator(finalUrl);
 
         playingStatus = true;
@@ -158,12 +165,12 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        this.stage = stage;
         musicPlayerVBox = new VBox();
         musicPlayerHBox = new HBox();
         searchBarHBox = new HBox();
-        textFlow = new TextFlow();
+        tilePane = new TilePane();
         scrollPane = new ScrollPane();
-
 
         playPauseButton = new Button("Pause");
         playPauseButton.setOnMouseClicked((MouseEvent e) -> {
@@ -178,6 +185,7 @@ public class HelloApplication extends Application {
                 playPauseButton.setText("Pause");
             }
             buttonCount.addAndGet(1);
+            System.out.println(buttonCount);
         });
 
         stopButton = new Button("Stop");
@@ -188,21 +196,25 @@ public class HelloApplication extends Application {
             }
             playingStatus = false;
             showPlayPauseButton();
+            System.out.println(buttonCount);
         });
 
         showImages();
 
         previousButton = new Button("Previous");
         previousButton.setOnMouseClicked((MouseEvent e) -> {
-            next=true;
-            previousNextSong(songList.indexOf(finalUrl)-1 >= 0, 1, songList.size() - 1, false);
+            next = true;
+            previousNextSong(songList.indexOf(finalUrl) - 1 >= 0, 1, songList.size() - 1, false);
+            buttonCount.addAndGet(1);
+            System.out.println(buttonCount);
         });
-
 
         nextButton = new Button("Next");
         nextButton.setOnMouseClicked((MouseEvent e) -> {
-            next=true;
-            previousNextSong(songList.indexOf(finalUrl)+1 <= songList.size()-1, -1, 0, true);
+            next = true;
+            previousNextSong(songList.indexOf(finalUrl) + 1 <= songList.size() - 1, -1, 0, true);
+            buttonCount.addAndGet(1);
+            System.out.println(buttonCount);
         });
 
         volumeSlider = new Slider(0, 100, 1);
@@ -222,27 +234,26 @@ public class HelloApplication extends Application {
         searchBarLabel = new Label();
 
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e)
-            {
-                //labelPause(searchBarLabel);
-                String ytUrl = searchBar.getText();
-                YoutubeDownloader youtubeDownloader = new YoutubeDownloader();
-                int exitCode = youtubeDownloader.downloadSong(ytUrl);
+            public void handle(ActionEvent e) {
+                ytUrl = searchBar.getText();
+                youtubeDownloader = new YoutubeDownloader();
+                exitCode = youtubeDownloader.downloadSong(ytUrl);
                 if (exitCode == 0) {
-                    searchBarLabel.setText("Song downloaded \uD83D\uDC4D");
+                    //searchBarLabel.setText("Song downloaded \uD83D\uDC4D");
                     try {
                         YoutubeDownloader.iterateSongs();
+                        labelText = "Song downloaded \uD83D\uDC4D";
                         addFile();
                     } catch (IOException ex) {
+                        labelText = "Error downloading song ❌";
+                        System.out.println(labelText);
+                        searchBarLabel.setText(labelText);
                         throw new RuntimeException(ex);
                     }
-                } else
-                    searchBarLabel.setText("Error downloading song ❌");
+                }
                 searchBar.setText("");
-
             }
         };
-
 
         searchBarButton.setOnAction(event);
 
@@ -264,23 +275,30 @@ public class HelloApplication extends Application {
         searchBarHBox.getChildren().addAll(searchBarLabel, searchBar, searchBarButton);
         searchBarHBox.setAlignment(Pos.TOP_RIGHT);
 
-        //scrollPane.setContent(textFlow);
-        //scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        musicPlayerVBox.getChildren().addAll(searchBarHBox, textFlow, musicPlayerHBox);
+        tilePane.setPrefColumns(3); // Set number of columns
+        tilePane.setHgap(0); // Remove horizontal gap
+        tilePane.setVgap(0); // Remove vertical gap
 
-        // Set VBox to grow with window
-        VBox.setVgrow(musicPlayerHBox, Priority.ALWAYS);
-        VBox.setVgrow(imageView, Priority.ALWAYS);
+        scrollPane.setContent(tilePane);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Hide vertical scrollbar
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Hide horizontal scrollbar
+        scrollPane.setStyle("-fx-background: transparent;"); // Make ScrollPane background transparent
+
+        scrollPane.addEventFilter(ScrollEvent.SCROLL, event1 -> {
+            double deltaY = event1.getDeltaY() * 5; // Adjust the scroll speed multiplier as needed
+            scrollPane.setVvalue(scrollPane.getVvalue() - deltaY / scrollPane.getHeight());
+            event1.consume();
+        });
+
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
+
+        musicPlayerVBox.getChildren().addAll(searchBarHBox, scrollPane, musicPlayerHBox);
 
         Scene scene = new Scene(musicPlayerVBox, 960, 540);
         stage.setTitle("Burnify");
         stage.setScene(scene);
         stage.show();
     }
-
-    //previousNextSong(songList.indexOf(finalUrl)-1 >= 0, 1, songList.size() - 1);
-
-    //previousNextSong(songList.indexOf(finalUrl)+1 <= songList.size()-1, -1, 0);
 
     private void previousNextSong(boolean a, int b, int getThis, boolean c) {
         if (mediaPlayer.getCurrentTime().lessThan(Duration.millis(5000)) || c) {
@@ -319,4 +337,3 @@ public class HelloApplication extends Application {
 
     }
 }
-
