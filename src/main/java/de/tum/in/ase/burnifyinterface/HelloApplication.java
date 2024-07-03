@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class HelloApplication extends Application {
@@ -50,7 +49,6 @@ public class HelloApplication extends Application {
     private ScrollPane scrollPane;
     private Media media;
     private MediaPlayer mediaPlayer;
-    private AtomicInteger buttonCount = new AtomicInteger();
     private List<File> sortedFileArray;
     private List<String> songList = new ArrayList<>();
     private boolean playingStatus = false;
@@ -61,6 +59,7 @@ public class HelloApplication extends Application {
     private YoutubeDownloader youtubeDownloader;
     private int exitCode;
     private String labelText;
+    private boolean count = true;
 
 
     private void labelPause(Label label) {
@@ -107,16 +106,18 @@ public class HelloApplication extends Application {
         System.out.println(imageView);
 
         imageView.setOnMouseClicked((MouseEvent e) -> {
-            if (buttonCount.get() % 2 == 0) {
+            if (count) {
                 imagesToSongs(file);
                 soundCreator(finalUrl);
+                count = false;
+                System.out.println(count);
             } else {
                 mediaPlayer.stop();
-                playingStatus = true;
+                count = true;
+                System.out.println(count);
+
             }
-            buttonCount.addAndGet(1);
             showPlayPauseButton();
-            System.out.println(buttonCount);
         });
     }
 
@@ -135,6 +136,8 @@ public class HelloApplication extends Application {
     }
 
     public void addFile() throws IOException {
+        playingStatus = true;
+
         File dir = new File("images/");
         File[] files = dir.listFiles();
 
@@ -154,12 +157,12 @@ public class HelloApplication extends Application {
         labelPause(searchBarLabel);
         searchBar.setText("");
 
-        mediaPlayer.stop();
-        soundCreator(finalUrl);
-
-        playingStatus = true;
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+        }
+        count = false;
         showPlayPauseButton();
-
+        soundCreator(finalUrl);
 
     }
 
@@ -175,28 +178,26 @@ public class HelloApplication extends Application {
 
         playPauseButton = new Button("Pause");
         playPauseButton.setOnMouseClicked((MouseEvent e) -> {
-            playingStatus = true;
-            showPlayPauseButton();
-            if (buttonCount.get() % 2 != 0) {
+            if (!count) {
                 mediaPlayer.pause();
+                count = true;
                 playPauseButton.setText("Play");
+                System.out.println(count);
             } else {
                 mediaPlayer.play();
+                count = false;
                 playPauseButton.setText("Pause");
+                System.out.println(count);
             }
-            buttonCount.addAndGet(1);
-            System.out.println(buttonCount);
         });
 
         stopButton = new Button("Stop");
         stopButton.setOnMouseClicked((MouseEvent e) -> {
             mediaPlayer.stop();
-            if (buttonCount.get() % 2 != 0) {
-                buttonCount.addAndGet(1);
-            }
-            playingStatus = false;
+            count = true;
+
+            System.out.println(count);
             showPlayPauseButton();
-            System.out.println(buttonCount);
         });
 
         showImages();
@@ -204,15 +205,13 @@ public class HelloApplication extends Application {
         previousButton = new Button("Previous");
         previousButton.setOnMouseClicked((MouseEvent e) -> {
             previousNextSong(songList.indexOf(finalUrl) - 1 >= 0, 1, songList.size() - 1, false);
-            buttonCount.addAndGet(1);
-            System.out.println(buttonCount);
+            System.out.println(count);
         });
 
         nextButton = new Button("Next");
         nextButton.setOnMouseClicked((MouseEvent e) -> {
             previousNextSong(songList.indexOf(finalUrl) + 1 <= songList.size() - 1, -1, 0, true);
-            buttonCount.addAndGet(1);
-            System.out.println(buttonCount);
+            showPlayPauseButton();
         });
 
         volumeSlider = new Slider(0, 100, 1);
@@ -299,13 +298,16 @@ public class HelloApplication extends Application {
     }
 
     private void previousNextSong(boolean a, int b, int getThis, boolean c) {
+        count = false;
         if (mediaPlayer.getCurrentTime().lessThan(Duration.millis(5000)) || c) {
             mediaPlayer.stop();
             if (a) {
+                mediaPlayer.stop();
                 String previousSongString = songList.get(songList.indexOf(finalUrl) - (b));
                 soundCreator(previousSongString);
                 finalUrl = previousSongString;
             } else {
+                mediaPlayer.stop();
                 soundCreator(songList.get(getThis));
                 finalUrl = songList.get(getThis);
             }
@@ -313,13 +315,17 @@ public class HelloApplication extends Application {
             mediaPlayer.stop();
             mediaPlayer.play();
         }
-        playingStatus = true;
         showPlayPauseButton();
     }
 
 
     private void showPlayPauseButton() {
         musicPlayerHBox.getChildren().clear();
+        if (count) {
+            playPauseButton.setText("Play");
+        } else {
+            playPauseButton.setText("Pause");
+        }
         if (playingStatus){
             musicPlayerHBox.getChildren().addAll(previousButton, playPauseButton, stopButton,
                     nextButton, volumeSlider);
